@@ -88,7 +88,7 @@ function addRecordHandler() {
     return;
   }
 
-  addRecord(name, !salary);
+  addRecord(name, parseFloat(salary));
 }
 
 function addRecord(name, salary) {
@@ -115,7 +115,7 @@ function secondHandler(e) {
 const showLastItem = function () {
   const items = salary_data;
   let lastKey;
-  for (const key in items){
+  for (const key in items) {
     lastKey = key;
   };
   const lastItem = items[lastKey];
@@ -222,15 +222,19 @@ function longLineCode() {
 */
 
 const uniquifyNames = function (items) {
+  console.log(items);
   const uniqueNames = {};
-
-  return items.map(function (item) {
-    if (uniqueNames[item.name]) {
-      uniqueNames[item.name] += " ";
-      item.name += uniqueNames[item.name];
+  let temp = items.map(function (item) {
+    console.log(item);
+    if (!uniqueNames[item.name]) {
+      uniqueNames[item.name] = item.name;
+      return item;
     } else {
-      uniqueNames[item.name] = "";
+      uniqueNames[item.name] += " ";
+      item.name = uniqueNames[item.name] + " ";
+      return item;
     }
-    return item;
   });
+  console.log(temp);
+  return temp;
 };
